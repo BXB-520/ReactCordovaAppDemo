@@ -196,7 +196,14 @@ const cordovaGetPosition = (): Promise<PositionType> => {
 
 /** 在浏览器打开链接 */
 const cordovaOpenInAppBrowser = (url: string) => {
+  if (!isCordova()) return;
   cordova.InAppBrowser.open(url, '_system');
+};
+
+/** 隐藏屏闪页面 */
+const cordovaHideSplashscreen = () => {
+  if (!isCordova()) return;
+  navigator.splashscreen.hide();
 };
 
 /** app录音插件
@@ -358,6 +365,7 @@ export {
   cordovaBarcodeScan, //扫描二维码
   cordovaGetPosition, //获取定位
   cordovaOpenInAppBrowser, //在浏览器打开链接
+  cordovaHideSplashscreen, //隐藏屏闪
   cordovaGetCaptureAudio, //录音
   cordovaFileUpload, //文件上传
   cordovaCallVolte, //拨打高清视频通话

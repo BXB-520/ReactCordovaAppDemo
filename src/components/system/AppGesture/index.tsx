@@ -4,6 +4,7 @@ import { Toast } from 'antd-mobile';
 import AppMain from '../AppMain';
 import { THEMECOLOR } from '@/constants/system';
 import styles from '../AppMain/index.less';
+import { cordovaHideSplashscreen } from '@/utils/cordova';
 
 declare const StatusBar: any;
 declare const navigator: any;
@@ -28,7 +29,7 @@ const AppGesture = ({ gestureprops }: any) => {
       /** 返回按钮绑定 */
       document.addEventListener('backbutton', eventBackButton);
 
-      navigator.splashscreen.hide();
+      cordovaHideSplashscreen();
     };
 
     // 待设备初始化完成，才能使用cordova插件

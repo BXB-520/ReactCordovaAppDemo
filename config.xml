@@ -1,20 +1,20 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.apache.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="org.apache.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets"
+    xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Ccs框架</name>
-    <description>
-        A sample Apache Cordova application that responds to the deviceready event.
-    </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
-    </author>
+    <description>A sample Apache Cordova application that responds to the deviceready event.</description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">Apache Cordova Team</author>
     <content src="index.html" />
+
     <access origin="*" />
+    <allow-navigation href="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />
@@ -25,6 +25,7 @@
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarStyle" value="lightContent" />
     <preference name="Fullscreen" value="false" />
+
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="mdpi" src="resources/icon/android/Icon-mdpi.png" />
@@ -32,27 +33,49 @@
         <icon density="xhdpi" src="resources/icon/android/Icon-xhdpi.png" />
         <icon density="xxhdpi" src="resources/icon/android/Icon-xxhdpi.png" />
         <icon density="xxxhdpi" src="resources/icon/android/Icon-xxxhdpi.png" />
-        <!-- <splash density="land-hdpi" src="resources/screen/android/screen-land-hdpi.png" />
-        <splash density="land-ldpi" src="resources/screen/android/screen-land-ldpi.png" />
-        <splash density="land-mdpi" src="resources/screen/android/screen-land-mdpi.png" />
-        <splash density="land-xhdpi" src="resources/screen/android/screen-land-xhdpi.png" />
-        <splash density="land-xxhdpi" src="resources/screen/android/screen-land-xxhdpi.png" />
-        <splash density="land-xxxhdpi" src="resources/screen/android/screen-land-xxxhdpi.png" />
-        <splash density="port-hdpi" src="resources/screen/android/screen-port-hdpi.png" />
-        <splash density="port-ldpi" src="resources/screen/android/screen-port-ldpi.png" />
-        <splash density="port-mdpi" src="resources/screen/android/screen-port-mdpi.png" />
-        <splash density="port-xhdpi" src="resources/screen/android/screen-port-xhdpi.png" />
-        <splash density="port-xxhdpi" src="resources/screen/android/screen-port-xxhdpi.png" />
-        <splash density="port-xxxhdpi" src="resources/screen/android/screen-port-xxxhdpi.png" /> -->
+        <config-file parent="/manifest" target="AndroidManifest.xml"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.CAMERA" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+        </config-file>
     </platform>
+
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <edit-config file="*-Info.plist" mode="merge" target="UIStatusBarHidden">
+            <true />
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge"
+            target="UIViewControllerBasedStatusBarAppearance">
+            <false />
+        </edit-config>
+        <icon height="60" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="60" />
+        <icon height="120" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="120" />
+        <icon height="180" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="180" />
+        <icon height="76" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="76" />
+        <icon height="152" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="152" />
+        <icon height="167" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="167" />
+        <icon height="120" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="120" />
+        <icon height="180" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="180" />
+        <icon height="40" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="40" />
+        <icon height="80" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="80" />
+        <icon height="57" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="57" />
+        <icon height="114" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="114" />
+        <icon height="72" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="72" />
+        <icon height="144" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="144" />
+        <config-file parent="NSCameraUsageDescription" target="*-Info.plist">
+            <string>APP想访问您的相机，允许吗？</string>
+        </config-file>
+        <config-file parent="NSPhotoLibraryAddUsageDescription" target="*-Info.plist">
+            <string>APP想访问您的相册，允许吗？</string>
+        </config-file>
     </platform>
-    <engine name="ios" />
-    <engine name="android" spec="^8.1.0" />
-    <plugin name="cordova-plugin-whitelist" />
-    <plugin name="cordova-plugin-ionic-webview">
+
+    <plugin name="cordova-plugin-ionic-webview" spec="^5.0.0">
         <variable name="ANDROID_SUPPORT_ANNOTATIONS_VERSION" value="27.+" />
     </plugin>
     <plugin name="cordova-plugin-device" />
@@ -60,7 +83,7 @@
     <plugin name="cordova-plugin-camera">
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
-    <plugin name="cordova-plugin-advanced-http">
+    <plugin name="cordova-plugin-advanced-http" spec="^3.1.0">
         <variable name="ANDROIDBLACKLISTSECURESOCKETPROTOCOLS" value="SSLv3,TLSv1" />
     </plugin>
     <plugin name="phonegap-plugin-mobile-accessibility" spec="^1.0.5" />
