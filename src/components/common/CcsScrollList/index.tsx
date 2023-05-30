@@ -134,7 +134,7 @@ const CcsScrollList: FC<PropsType> = (props) => {
                 <ErrorBlock
                   status="empty"
                   title={pagination.emptyTitle || '暂无数据'}
-                  description={''}
+                  description=""
                   style={{
                     background: 'rgb(255 255 255 / 80%)',
                     borderRadius: '6px',

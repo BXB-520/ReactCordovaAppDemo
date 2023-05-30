@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 import styles from './index.less';
 
 export const AppPage = (props: { children: ReactNode }) => {

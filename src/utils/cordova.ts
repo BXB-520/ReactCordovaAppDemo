@@ -90,7 +90,7 @@ const cordovaBarcodeScan = (): Promise<string> => {
   });
 };
 
-interface positionType {
+interface PositionType {
   longitude: string;
   latitude: string;
   accuracy: string;
@@ -98,7 +98,7 @@ interface positionType {
 }
 
 /** 获取定位 */
-const cordovaGetPosition = (): Promise<positionType> => {
+const cordovaGetPosition = (): Promise<PositionType> => {
   Toast.show({
     content: '正在获取位置信息',
     position: 'bottom',
@@ -145,28 +145,25 @@ const cordovaGetPosition = (): Promise<positionType> => {
         console.log(error.code);
         switch (error.code) {
           case 1:
-            {
-              Toast.show({
-                content: '定位未授权',
-                position: 'bottom',
-              });
-            }
+            Toast.show({
+              content: '定位未授权',
+              position: 'bottom',
+            });
+
             break;
           case 2:
-            {
-              Toast.show({
-                content: '位置信息获取失败',
-                position: 'bottom',
-              });
-            }
+            Toast.show({
+              content: '位置信息获取失败',
+              position: 'bottom',
+            });
+
             break;
           case 3:
-            {
-              Toast.show({
-                content: '位置信息获取超时',
-                position: 'bottom',
-              });
-            }
+            Toast.show({
+              content: '位置信息获取超时',
+              position: 'bottom',
+            });
+
             break;
 
           default:
@@ -291,12 +288,12 @@ const cordovaCheckPermission = () => {
   // 定义需要获取的手机权限List
   const permList: any[] = [
     permissions.WRITE_EXTERNAL_STORAGE,
-    permissions.ACCESS_FINE_LOCATION,
+    // permissions.ACCESS_FINE_LOCATION,
     permissions.CAMERA,
   ];
 
   // 检查权限
-  permissions.hasPermission(
+  return permissions.hasPermission(
     permList,
     (success: { hasPermission: boolean }) => {
       // 检查成功

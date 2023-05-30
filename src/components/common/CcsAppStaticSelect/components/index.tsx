@@ -1,22 +1,15 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import useRequest from '@ahooksjs/use-request';
 import publicStyle from '../index.less';
 import { CheckOutline, DownFill, SearchOutline } from 'antd-mobile-icons';
-import {
-  CheckList,
-  DatePicker,
-  Input,
-  Picker,
-  Popup,
-  SpinLoading,
-} from 'antd-mobile';
-import { itemPicker } from '..';
+import { DatePicker, Input, Picker, Popup, SpinLoading } from 'antd-mobile';
+import { ItemPicker } from '..';
 import moment from 'moment';
 
 interface StaticSelectProps {
-  item: itemPicker;
+  item: ItemPicker;
   propCode: string | undefined;
-  pickerList: itemPicker[];
+  pickerList: ItemPicker[];
   indexs: number;
   paramsValue: any;
   setParamsValue: any;
@@ -87,7 +80,7 @@ const StaticSelect: FC<StaticSelectProps> = ({
   // 请求数据，并缓存静态值
   const { loading, data }: any = useRequest<ParamType>(getStaticValue, {
     defaultParams: [{ pageNo: 1, pageSize: 20, query: { propCode, state: 1 } }],
-    manual: propCode ? false : true,
+    manual: !propCode,
     cacheKey: `STATIC_${propCode}`, //缓存静态值key
     staleTime: 300000, // 在这个时间内，不会重新发起请求
     cacheTime: 300000,
@@ -129,15 +122,15 @@ const StaticSelect: FC<StaticSelectProps> = ({
           loading={loading}
           columns={[showData()]}
           visible={visible}
-          onConfirm={(value) => {
+          onConfirm={(values: any) => {
             setParamsValue((setitem: any) => {
               setitem[indexs] = showData().find((items: any) => {
-                return items.value == value;
+                return items.value == values;
               })?.label;
               return { ...setitem };
             });
 
-            onHandelChange(indexs, value[0]);
+            onHandelChange(indexs, values[0]);
           }}
           onClose={() => setVisible(false)}
         />
@@ -321,7 +314,7 @@ const StaticSelect: FC<StaticSelectProps> = ({
                     }
                     onChange={(e) => {
                       setParamsValue((setitem: any) => {
-                        setitem[indexs] = e ? e : item.title;
+                        setitem[indexs] = e || item.title;
                         return { ...setitem };
                       });
                     }}

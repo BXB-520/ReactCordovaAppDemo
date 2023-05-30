@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { AppContent, AppPage } from '@/components/system/AppPages';
 import AppHeader from '@/components/system/AppHeader';
 import publicStyle from './index.less';

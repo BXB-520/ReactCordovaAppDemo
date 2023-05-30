@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { history } from 'umi';
 import { Toast } from 'antd-mobile';
 import AppMain from '../AppMain';

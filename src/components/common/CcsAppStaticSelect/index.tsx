@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { DotLoading, Popover } from 'antd-mobile';
 import publicStyle from './index.less';
 import { RedoOutline, UnorderedListOutline } from 'antd-mobile-icons';
 import StaticSelect from './components';
 
-export interface itemPicker {
+export interface ItemPicker {
   /** 标题 */
   title: string;
   /** 对应key值 */
@@ -22,10 +22,10 @@ export interface itemPicker {
   /** 默认参数 静态值不能用 */
   defvalue?: string;
   /** 是否返回label而不是value */
-  backLabel?:boolean;
+  backLabel?: boolean;
 }
 
-export interface itemPickeritem {
+export interface ItemPickeritem {
   label?: string;
   value?: string;
 }
@@ -33,7 +33,7 @@ export interface itemPickeritem {
 /** app条件选择器 用于顶部选择 */
 const CcsAppStaticSelect = (props: {
   /** list参数 */
-  pickerList: itemPicker[];
+  pickerList: ItemPicker[];
   /** 回调携带参数 */
   onHandelCallBack: Function;
   /** 外部展示多少条数据 */
@@ -43,9 +43,9 @@ const CcsAppStaticSelect = (props: {
 
   const [paramsValue, setParamsValue] = useState<any>({});
 
-  const [firlist, setFirList] = useState<itemPicker[]>([]);
-  const [endlist, setEndList] = useState<itemPicker[]>([]);
-  const [alllist, setAllList] = useState<itemPicker[]>([]);
+  const [firlist, setFirList] = useState<ItemPicker[]>([]);
+  const [endlist, setEndList] = useState<ItemPicker[]>([]);
+  const [alllist, setAllList] = useState<ItemPicker[]>([]);
 
   const params = useRef<any>({});
   const defparams = useRef<any>({});
@@ -53,12 +53,12 @@ const CcsAppStaticSelect = (props: {
 
   const rest = () => {
     if (alllist.length > 0) {
-      params.current = alllist.map((item: itemPicker) => {
+      params.current = alllist.map((item: ItemPicker) => {
         return item.label;
       });
 
       setParamsValue(
-        alllist.map((item: itemPicker, index: number) => {
+        alllist.map((item: ItemPicker, index: number) => {
           if (item.defvalue) {
             const newJson: any = {};
             newJson[`${params.current[index]}`] = item.defvalue;
@@ -94,13 +94,17 @@ const CcsAppStaticSelect = (props: {
 
     newJson[`${params.current[number]}`] = data;
 
-    endparams.current = { ...defparams.current, ...endparams.current, ...newJson };
+    endparams.current = {
+      ...defparams.current,
+      ...endparams.current,
+      ...newJson,
+    };
     onHandelCallBack(endparams.current);
   };
 
   return (
     <div className={publicStyle.pickbg}>
-      {firlist.map((item: itemPicker, index: number) => {
+      {firlist.map((item: ItemPicker, index: number) => {
         return (
           <StaticSelect
             key={item.title}
@@ -124,7 +128,7 @@ const CcsAppStaticSelect = (props: {
         <Popover
           content={
             <div className={publicStyle.popover}>
-              {endlist.map((item: itemPicker, index: number) => {
+              {endlist.map((item: ItemPicker, index: number) => {
                 return (
                   <StaticSelect
                     key={item.title}

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AppContent, AppPage } from '@/components/system/AppPages';
 import AppHeader from '@/components/system/AppHeader';
 import styles from './index.less';
@@ -12,8 +12,6 @@ const PlayVideo = (props: any) => {
   const context: RouteInfoContextType = useContext(RouteInfoContext);
 
   useEffect(() => {}, []);
-
-
 
   return (
     <AppPage>

@@ -1,4 +1,4 @@
-import { useEffect, useState, FC } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import publicStyle from './index.less';
 
 interface CcsPopupType {
@@ -43,33 +43,29 @@ const CcsPopup: FC<CcsPopupType> = ({
   const openIsLeftOrRight = () => {
     if (position == 'right') {
       return `calc(100vw - ${contentWidth})`;
-    } else {
-      return '0vw';
     }
+    return '0vw';
   };
 
   const cloceIsLeftOrRight = () => {
     if (position == 'right') {
       return '100vw';
-    } else {
-      return '-100vw';
     }
+    return '-100vw';
   };
 
   const openIsTopOrBottom = () => {
     if (position == 'bottom') {
       return `calc(100vh - ${contentWidth})`;
-    } else {
-      return '42px';
     }
+    return '42px';
   };
 
   const cloceIsTopOrBottom = () => {
     if (position == 'bottom') {
       return '100vh';
-    } else {
-      return `calc( -${contentWidth} + 42px ) `;
     }
+    return `calc( -${contentWidth} + 42px ) `;
   };
 
   return (

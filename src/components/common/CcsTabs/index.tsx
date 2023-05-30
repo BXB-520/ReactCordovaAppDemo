@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import styles from './index.less';
 import { Tabs } from 'antd-mobile';
 

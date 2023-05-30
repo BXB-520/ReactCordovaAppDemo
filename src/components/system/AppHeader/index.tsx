@@ -1,5 +1,5 @@
 import { NavBar, NavBarProps } from 'antd-mobile';
-import { FC, ReactChild } from 'react';
+import React, { FC, ReactChild } from 'react';
 import { history } from 'umi';
 import styles from './index.less';
 
@@ -21,6 +21,7 @@ const AppHeader: FC<AppHeaderPropsType> = ({
   navBarStyle,
 }) => {
   const handleOnLeftClick = () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     onBack ? onBack() : history.goBack();
   };
 

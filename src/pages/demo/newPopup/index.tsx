@@ -1,11 +1,6 @@
-import { useEffect, useState } from 'react';
-import { history } from 'umi';
-
+import React, { useEffect, useState } from 'react';
 import { AppContent, AppPage } from '@/components/system/AppPages';
 import AppHeader from '@/components/system/AppHeader';
-import CcsAppStaticSelect, {
-  itemPicker,
-} from '@/components/common/CcsAppStaticSelect';
 import styles from './index.less';
 import { Button, Card } from 'antd-mobile';
 import CcsPopup from '@/components/common/CcsPopup';
@@ -17,8 +12,6 @@ const NewPopup = (props: any) => {
   const [visable4, setVisable4] = useState<boolean>(false);
 
   useEffect(() => {}, []);
-
-
 
   return (
     <AppPage>
@@ -72,7 +65,7 @@ const NewPopup = (props: any) => {
               <br />
               onMaskClick:遮罩事件
               <br />
-              position:展开方向 'top' | 'bottom' | 'right' | 'left'
+              position:展开方向 top | bottom | right | left
               <br />
               children:内容
               <br />
@@ -86,32 +79,32 @@ const NewPopup = (props: any) => {
         <CcsPopup
           visable={visable1}
           onMaskClick={() => setVisable1(!visable1)}
-          contentWidth={'60vw'}
-          position={'right'}
+          contentWidth="60vw"
+          position="right"
         >
           这是右边出来的内容
         </CcsPopup>
         <CcsPopup
           visable={visable2}
           onMaskClick={() => setVisable2(!visable2)}
-          contentWidth={'60vw'}
-          position={'left'}
+          contentWidth="60vw"
+          position="left"
         >
           这是左边出来的内容
         </CcsPopup>
         <CcsPopup
           visable={visable3}
           onMaskClick={() => setVisable3(!visable3)}
-          contentWidth={'30vh'}
-          position={'top'}
+          contentWidth="30vh"
+          position="top"
         >
           这是上边出来的内容
         </CcsPopup>
         <CcsPopup
           visable={visable4}
           onMaskClick={() => setVisable4(!visable4)}
-          contentWidth={'30vh'}
-          position={'bottom'}
+          contentWidth="30vh"
+          position="bottom"
         >
           这是下边出来的内容
         </CcsPopup>

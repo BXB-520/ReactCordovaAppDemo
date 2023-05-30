@@ -3,6 +3,7 @@ import AppHeader from '@/components/system/AppHeader';
 import styles from './index.less';
 import { Card, Input } from 'antd-mobile';
 import CcsTabs from '@/components/common/CcsTabs';
+import React from 'react';
 
 const TopTabs = () => {
   const list = [

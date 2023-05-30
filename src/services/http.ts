@@ -1,14 +1,9 @@
+/* eslint-disable guard-for-in */
 import { history } from 'umi';
-import { BASEURL } from '@/constants';
 import { extend, Context, RequestMethod } from 'umi-request';
 import { delLocalStorage, getLocalStorage, isCordova } from '../utils/common';
-import { NEWWORK_CODE_MESSAGE } from '@/constants/system';
+import { DEV_BASE_URL, NEWWORK_CODE_MESSAGE } from '@/constants/system';
 import { Toast } from 'antd-mobile';
-import {
-  RouteInfoContext,
-  RouteInfoContextType,
-} from '@/components/system/AppMain';
-import { useContext } from 'react';
 
 export interface HttpResult<T = any> {
   code: number;
@@ -20,7 +15,7 @@ export interface HttpResult<T = any> {
 declare const cordova: any;
 
 /** 请求异常处理程序 */
-const errorHandler = (error: any) => {
+const errorHandler = (error: any, resolve?: Function) => {
   const response = isCordova() ? error : error?.response;
 
   if (response && response.status) {
@@ -30,18 +25,37 @@ const errorHandler = (error: any) => {
     const { status, url } = response;
 
     if (status == 401) {
+      //app 回执
+      if (resolve) resolve(response.error);
+
       Toast.show({
         content: '登录失效，请重新登录',
         position: 'bottom',
       });
-
       delLocalStorage('APP_TICKET');
-
       history.push({
         pathname: '/login',
       });
+    } else if (status == -6) {
+      //未连接网络处理为正常进入
+      if (resolve) {
+        resolve({
+          code: 200,
+          data: {},
+          msg: '无网络',
+          success: false,
+        });
+      }
+
+      Toast.show({
+        content: '您的网络发生异常，无法连接服务器',
+        position: 'bottom',
+      });
     } else {
-      console.log(`请求错误 ${status}: ${url}${errorText}`);
+      //app 回执
+      if (resolve) resolve(response.error);
+
+      console.log(`请求错误 ${status}: ${url}${errorText}${response.error}`);
       Toast.show({
         content: `请求错误 ${status}: ${url}${errorText}`,
         position: 'bottom',
@@ -99,12 +113,13 @@ const request = async (
 
     /** app需要完整URL */
     if (newUrl.startsWith('/server')) {
-      newUrl = `${BASEURL}${url}`;
+      newUrl = `${DEV_BASE_URL}${url}`;
     }
 
     // console.log(newUrl);
 
     if (method == 'GET') {
+      // eslint-disable-next-line no-restricted-syntax
       for (const key in params) {
         const source = { [key]: params[key] + '' };
         urlData = Object.assign(urlData, source);
@@ -141,7 +156,7 @@ const request = async (
           }
         },
         (response: any) => {
-          errorHandler(response);
+          errorHandler(response, resolve);
         },
       );
     });

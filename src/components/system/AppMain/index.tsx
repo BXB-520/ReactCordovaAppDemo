@@ -1,4 +1,6 @@
-import {
+/* eslint-disable no-lone-blocks */
+/* eslint-disable @typescript-eslint/no-shadow */
+import React, {
   ReactNode,
   Reducer,
   useCallback,
@@ -8,16 +10,14 @@ import {
   useRef,
   useState,
 } from 'react';
-import './index.less';
 import { Switch, history } from 'umi';
-import React from 'react';
 import styles from './index.less';
 import Gesture from 'rc-gesture';
 import { Toast } from 'antd-mobile';
 import { ANIMATION_TIME } from '@/constants/system';
 import { requestMobileContext } from '@/utils/common';
 
-interface historyReducerType {
+interface HistoryReducerType {
   type: 'update' | 'reduce' | '';
   historyAction: 'POP' | 'PUSH' | 'REPLACE';
   historyList: any[];
@@ -43,7 +43,8 @@ const AppMain = ({ mainprops }: any) => {
     [],
   );
 
-  function historyReducer(state: any[], action: historyReducerType) {
+  function historyReducer(state: any[], action: HistoryReducerType) {
+    // eslint-disable-next-line @typescript-eslint/no-shadow
     const { type, historyAction, historyList } = action;
 
     /** 登录页清除全部 */
@@ -224,16 +225,14 @@ const AppMain = ({ mainprops }: any) => {
       );
       pageCallBackRef.current.pop();
       callBackDataRef.current = null;
-    } else {
+    } else if (
+      pathname ===
+      pageCallBackRef.current[pageCallBackRef.current.length - 1].pageurl
+    ) {
       /** 页面正常返回需要销毁注册的返回事件 */
       //  if (pathname === pageCallBackRef.current.at(-1)!.pageurl) {
-      if (
-        pathname ===
-        pageCallBackRef.current[pageCallBackRef.current.length - 1].pageurl
-      ) {
-        pageCallBackRef.current.pop();
-        callBackDataRef.current = null;
-      }
+      pageCallBackRef.current.pop();
+      callBackDataRef.current = null;
     }
   };
 
@@ -306,29 +305,30 @@ const AppMain = ({ mainprops }: any) => {
     if (backtype == '') {
       if (type == 'open') {
         return styles.open;
-      } else if (type == 'end') {
-        return styles.end;
-      } else {
-        return null;
       }
-    } else if (backtype == 'Back') {
-      return styles.back;
-    } else if (backtype == 'Next') {
-      return styles.next;
-    } else {
+      if (type == 'end') {
+        return styles.end;
+      }
       return null;
     }
+    if (backtype == 'Back') {
+      return styles.back;
+    }
+    if (backtype == 'Next') {
+      return styles.next;
+    }
+    return null;
   };
 
   /** 页面层级决定显示效果，超过3页隐藏 防止页面卡顿 */
   const childtransform = (id: number) => {
     if (id == historyList[historyList.length - 1].id) {
       return styles.now;
-    } else if (id == historyList[historyList.length - 2].id) {
-      return styles.old;
-    } else {
-      return styles.hidden;
     }
+    if (id == historyList[historyList.length - 2].id) {
+      return styles.old;
+    }
+    return styles.hidden;
   };
 
   return (
@@ -399,7 +399,7 @@ const AppMain = ({ mainprops }: any) => {
                       : item.id == historyList[historyList.length - 2].id
                       ? `translateX(calc(-30% + ( 30% / ( ${
                           window.innerWidth
-                        } / ${parseInt(movex)} ))))`
+                        } / ${parseInt(movex, 10)} ))))`
                       : `translateX(0px)`,
                 }}
                 className={`${childtransform(item.id)} ${styles.borderleft}`}
@@ -450,7 +450,7 @@ const AppMain = ({ mainprops }: any) => {
                     : item.id == historyList[historyList.length - 2].id
                     ? `translate3d(calc(-30% + ( 30% / ( ${
                         window.innerWidth
-                      } / ${parseInt(movex)} ))),0px,0px)`
+                      } / ${parseInt(movex, 10)} ))),0px,0px)`
                     : `translate3d(0px,0px,0px)`,
               }}
               className={`${childtransform(item.id)} ${styles.borderleft}`}
@@ -503,7 +503,7 @@ export interface RouteInfoContextType {
   pageCallBackRef: {
     current: [{}];
   };
-  dispatch: React.Dispatch<historyReducerType>;
+  dispatch: React.Dispatch<HistoryReducerType>;
   /** 清除路由 */
   handelDelHistory: () => void;
 }

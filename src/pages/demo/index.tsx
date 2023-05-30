@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { List, Switch } from 'antd-mobile';
 import { history } from 'umi';
 import { dealImage } from '@/utils/common';

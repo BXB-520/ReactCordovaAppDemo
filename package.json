@@ -6,6 +6,13 @@
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
+    "lint": "umi g tmp && npm run lint:js && npm run lint:style && npm run lint:prettier",
+    "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
+    "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
+    "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+    "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
+    "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
+    "lint-staged": "lint-staged",
     "test:coverage": "umi-test --coverage"
   },
   "gitHooks": {
@@ -52,7 +59,7 @@
     "babel-eslint": "^10.1.0",
     "cordova-android": "^8.1.0",
     "cordova-ios": "^6.2.0",
-    "cordova-plugin-advanced-http": "^3.3.1",
+    "cordova-plugin-advanced-http": "^3.2.2",
     "cordova-plugin-android-permissions": "^1.1.5",
     "cordova-plugin-barcodescanner": "^0.7.4",
     "cordova-plugin-camera": "^4.1.0",
@@ -87,7 +94,9 @@
         "ANDROIDBLACKLISTSECURESOCKETPROTOCOLS": "SSLv3,TLSv1"
       },
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
       "cordova-plugin-android-permissions": {},
       "phonegap-plugin-mobile-accessibility": {},
       "cordova-plugin-inappbrowser": {},

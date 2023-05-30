@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { AppContent, AppPage } from '@/components/system/AppPages';
 import AppHeader from '@/components/system/AppHeader';
@@ -22,7 +22,9 @@ const PlayVideo = (props: any) => {
     <AppPage>
       <AppHeader>flv视频播放器</AppHeader>
       <AppContent style={{ backgroundColor: '#f4f5fb' }}>
-        <div className={styles.video}>{show ? <CcsPlayFlvVideo playUrl={value} /> : null}</div>
+        <div className={styles.video}>
+          {show ? <CcsPlayFlvVideo playUrl={value} /> : null}
+        </div>
         <div className={styles.bg}>
           <div className={styles.content}>
             <Card title="请输入flv视频Url">

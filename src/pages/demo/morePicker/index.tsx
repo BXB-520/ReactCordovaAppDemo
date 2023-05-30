@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
 import { AppContent, AppPage } from '@/components/system/AppPages';
 import AppHeader from '@/components/system/AppHeader';
 import CcsAppStaticSelect, {
-  itemPicker,
+  ItemPicker,
 } from '@/components/common/CcsAppStaticSelect';
 import styles from './index.less';
 import { Card } from 'antd-mobile';
 import { DelayUseEffect } from '@/hooks';
 
-const pickerDataList: itemPicker[] = [
+const pickerDataList: ItemPicker[] = [
   {
     title: '基础单选',
     label: 'baseValue',

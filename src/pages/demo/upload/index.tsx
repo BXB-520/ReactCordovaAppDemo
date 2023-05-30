@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { AppContent, AppPage } from '@/components/system/AppPages';
 import AppHeader from '@/components/system/AppHeader';
 import { Card, Button } from 'antd-mobile';
@@ -7,8 +7,6 @@ import styles from './index.less';
 import CcsUseCamera from '@/components/common/CcsUseCamera';
 
 const request = () => {
-  useEffect(() => {}, []);
-
   DelayUseEffect(() => {});
 
   return (
@@ -17,7 +15,7 @@ const request = () => {
       <AppContent style={{ backgroundColor: '#f4f5fb' }}>
         <div className={styles.bg}>
           <div className={styles.content}>
-            <Card title={`图片选择`}>
+            <Card title="图片选择">
               <div>
                 <CcsUseCamera
                   type="CAMERA"

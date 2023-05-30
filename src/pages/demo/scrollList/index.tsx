@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { AppContent, AppPage } from '@/components/system/AppPages';
 import AppHeader from '@/components/system/AppHeader';
@@ -17,8 +17,9 @@ import CcsPlayFlvVideo from '@/components/common/CcsPlayFlvVideo';
 import useRequest from '@ahooksjs/use-request';
 import { client_search_cp } from './_serves';
 import CcsScrollList from '@/components/common/CcsScrollList';
-import { HttpResult } from '@/utils/interface';
+
 import { DelayUseEffect } from '@/hooks';
+import { HttpResult } from '@/services/http';
 
 const QueryList = (
   e: any,
@@ -120,8 +121,8 @@ const PlayVideo = (props: any) => {
                     background: '#87ceeb',
                     borderRadius: '0px',
                     margin: '8px',
-                    textAlign:"center",
-                    lineHeight:"60px"
+                    textAlign: 'center',
+                    lineHeight: '60px',
                   }}
                 >
                   {item.title}

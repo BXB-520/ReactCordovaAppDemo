@@ -1,5 +1,4 @@
 import { ANIMATION_TIME } from '@/constants/system';
-import useRequest from '@ahooksjs/use-request';
 import { useEffect } from 'react';
 
 /** 延时加载 */
@@ -13,4 +12,3 @@ export const DelayUseEffect = (Effect: Function, unEffect?: Function) => {
     };
   }, []);
 };
-export const AppUseRequest = () => useRequest;

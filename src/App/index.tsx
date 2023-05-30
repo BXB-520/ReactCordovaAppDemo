@@ -1,10 +1,10 @@
 import { history, Redirect, useDispatch } from 'umi';
 import AppGesture from '@/components/system/AppGesture';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import VConsole from 'vconsole';
 import { FloatingBubble } from 'antd-mobile';
 import { LeftOutline } from 'antd-mobile-icons';
-import StartPage from '@/assets/imgs/login/bg.png';
+import StartPage from '@/assets/imgs/login/start.png';
 import { getLocalStorage, isCordova, setSessionStorage } from '@/utils/common';
 import { cordovaCheckPermission } from '@/utils/cordova';
 
@@ -18,6 +18,7 @@ const App = (props: any) => {
   const TICKET: any = getLocalStorage('APP_TICKET');
 
   useEffect(() => {
+    // eslint-disable-next-line no-new
     if (process.env.NODE_ENV !== 'development') new VConsole();
     if (!isCordova()) handelAppLoad();
 
@@ -43,9 +44,16 @@ const App = (props: any) => {
         type: 'login/refresh',
         payload: {},
       });
-      setRefresh(true);
+
+      setTimeout(
+        () => setRefresh(true),
+        process.env.NODE_ENV == 'development' ? 0 : 800,
+      );
     } else {
-      setRefresh(true);
+      setTimeout(
+        () => setRefresh(true),
+        process.env.NODE_ENV == 'development' ? 0 : 800,
+      );
     }
   };
 
@@ -92,8 +100,8 @@ const App = (props: any) => {
           <div
             style={{
               backgroundImage: `url(${StartPage})`,
-              width: '100%',
-              height: '100%',
+              width: '100vw',
+              height: '100vh',
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center',
