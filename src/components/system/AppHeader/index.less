@@ -1,0 +1,26 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable-next-line import-notation */
+@import '../../../common.less';
+
+/** ios顶部底部偏移量 自动适配 */
+.topsafearea {
+  color: #fff;
+  background: @theme-color;
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+  z-index: 1000;
+
+  :global {
+    .adm-nav-bar {
+      height: 42px;
+    }
+    
+    .adm-nav-bar-right{
+      text-align: -webkit-right;
+    }
+
+    .adm-nav-bar-back{
+      padding: 0;
+    }
+  }
+}

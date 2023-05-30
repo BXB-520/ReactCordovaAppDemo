@@ -1,0 +1,66 @@
+/* stylelint-disable function-no-unknown */
+
+.popupleftbg {
+  position: fixed;
+  height: calc(100vh - 42px);
+  top: 42px;
+  z-index: 998;
+  transition: left 300ms;
+  transition-timing-function: easy;
+
+  .content {
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
+    position: absolute;
+    background-color: #fff;
+    height: calc(100vh - 42px);
+    z-index: 999;
+  }
+
+  .popupmock {
+    position: fixed;
+    background-color: #00000054;
+    top: 42px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 42px);
+    z-index: 998;
+    transition: opacity 300ms;
+  }
+}
+
+.popupbottombg {
+  position: fixed;
+  width: 100vw;
+  top: 42px;
+  z-index: 998;
+  transition: top 300ms;
+  transition-timing-function: easy;
+
+  .content {
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
+    position: absolute;
+    background-color: #fff;
+    width: 100vw;
+    z-index: 999;
+  }
+
+  .contentbottom {
+    position: absolute;
+    background-color: #fff;
+    width: 100vw;
+    z-index: 999;
+  }
+
+  .popupmock {
+    position: fixed;
+    background: #00000054;
+    top: 42px;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 998;
+    transition: opacity 300ms;
+  }
+}

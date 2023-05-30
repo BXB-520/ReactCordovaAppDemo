@@ -1,0 +1,24 @@
+/* stylelint-disable keyframes-name-pattern */
+/* stylelint-disable-next-line import-notation */
+@import '../../../common.less';
+
+.forscrolllist {
+  :global {
+    .adm-pull-to-refresh {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .adm-pull-to-refresh-content {
+      height: 100%;
+    }
+  }
+}
+
+.spinloading {
+  :global {
+    .adm-spin-loading-svg > .adm-spin-loading-fill {
+      stroke: @theme-color;
+    }
+  }
+}

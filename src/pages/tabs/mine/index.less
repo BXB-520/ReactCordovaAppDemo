@@ -1,0 +1,58 @@
+.header {
+  :global {
+    .adm-nav-bar-back {
+      margin-right: 0px;
+    }
+  }
+}
+.titleContent {
+  height: 200px;
+  padding: 8px;
+  div {
+    background-color: #fff;
+    border-radius: 8px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    box-shadow: 0px 5px 10px #00000080;
+  }
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.Content {
+  margin: 0px 8px;
+  //background: red;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+  .listBox {
+    width: 25%;
+    height: 25vw;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0px 5px 10px #00000024;
+    }
+    span {
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: pre;
+      width: 100%;
+    }
+  }
+}

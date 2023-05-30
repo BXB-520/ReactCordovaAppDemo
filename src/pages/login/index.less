@@ -1,0 +1,96 @@
+.bg {
+  text-align: center;
+  padding: 32px;
+  overflow: scroll;
+
+  .logo {
+    height: 56vw;
+    width: 100%;
+    margin: 20px 0 12px;
+  }
+
+  .title {
+    text-align: left;
+    font-size: 30px;
+    font-weight: 700;
+    margin: 24px 0;
+  }
+
+  .content {
+    --placeholder-color: red;
+
+    :global {
+      .adm-input {
+        --placeholder-color: #98a0b0;
+        height: 30px;
+      }
+
+      .adm-form-item-label {
+        color: #98a0b0;
+      }
+
+      .adm-list-item {
+        padding-left: 0;
+      }
+
+      .adm-form .adm-list.adm-list {
+        --border-top: transparent;
+        --border-bottom: transparent;
+      }
+
+      .adm-form-item-child-position-normal {
+        border-bottom: 1px solid #dcdde0;
+      }
+
+      .adm-list-item-content {
+        border-top: transparent;
+      }
+
+      .adm-list-item-content-prefix {
+        width: 40px;
+      }
+
+      .adm-list-item-content-main {
+        padding: 14px 0;
+      }
+
+      .adm-form-item.adm-form-item-horizontal .adm-list-item-content-prefix {
+        padding-top: 14px;
+        padding-bottom: 14px;
+      }
+
+      .adm-input-element {
+        font-size: 18px;
+      }
+
+      .adm-form-item.adm-form-item-horizontal .adm-list-item-content-extra {
+        height: 31px;
+        border-bottom: 1px solid #dcdde0;
+      }
+
+      svg {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .forget {
+    margin: 10px 0;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: right;
+    color: #276dd4;
+  }
+
+  .loginin {
+    margin: 24px 0;
+  }
+
+  .or {
+    color: #98a0b0;
+  }
+
+  .change {
+    margin: 24px 0;
+  }
+}

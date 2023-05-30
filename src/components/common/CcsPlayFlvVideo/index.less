@@ -1,0 +1,50 @@
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable-next-line import-notation */
+@import '../../../common.less';
+
+.videobackground {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .box {
+    position: absolute;
+    transform: translate(-50%, -60%);
+    left: 50%;
+    top: 50%;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    font-size: 75px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    z-index: 99;
+
+    .boxs {
+      width: 100%;
+      height: 100%;
+      background: @theme-color;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      padding-left: 10px;
+    }
+  }
+}
+
+.flexStyle {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  :global {
+    .ant-spin-dot ant-spin-dot-spin {
+      font-size: 40px;
+    }
+  }
+}

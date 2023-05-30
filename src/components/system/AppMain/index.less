@@ -1,0 +1,181 @@
+/* stylelint-disable property-no-vendor-prefix */
+/* stylelint-disable keyframes-name-pattern */
+/* stylelint-disable-next-line import-notation */
+@import '../../../common.less';
+
+/** 层级超过3就隐藏显示 不然会卡顿，now代表当前页，old代表上一页 */
+.hidden {
+  display: none;
+  opacity: 0;
+}
+
+.borderleft {
+  box-shadow: -1px 0 1px #cfcfcf94;
+}
+
+/** 正常去往下一页动画 cubic-bezier(0.8, 0.6 0.4, 0.2, 1) */
+.open {
+  .now {
+    animation: openAnimation @animation-time+60ms 1;
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    opacity: 1;
+  }
+
+  .old {
+    animation: openOldAnimation @animation-time+60ms 1;
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    opacity: 1;
+  }
+}
+
+/** 正常回到上一页动画 */
+.end {
+  .now {
+    animation: endAnimation @animation-time 1;
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    animation-fill-mode: forwards;
+    opacity: 1;
+  }
+
+  .old {
+    animation: endOldAnimation @animation-time 1;
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    animation-fill-mode: forwards;
+    opacity: 1;
+  }
+}
+
+/** ios滑动不超过60 恢复 */
+.next {
+  .now {
+    animation: nextAnimation @animation-time 1;
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    animation-fill-mode: forwards;
+    opacity: 1;
+  }
+
+  .old {
+    animation: nextOldAnimation @animation-time 1;
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    animation-fill-mode: forwards;
+    opacity: 1;
+  }
+}
+
+/** ios滑动超过60 回到上一页 */
+.back {
+  .now {
+    animation: backAnimation @animation-time 1;
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    animation-fill-mode: forwards;
+    opacity: 1;
+  }
+
+  .old {
+    animation: backOldAnimation @animation-time 1;
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    animation-fill-mode: forwards;
+    opacity: 1;
+  }
+}
+
+@keyframes openAnimation {
+  0% {
+    -webkit-transform: translate3d(100%, 0, 0);
+    -moz-transform: translate3d(100%, 0, 0);
+    -ms-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0%, 0, 0);
+    -moz-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+@keyframes openOldAnimation {
+  0% {
+    -webkit-transform: translate3d(0%, 0, 0);
+    -moz-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(-30%, 0, 0);
+    -moz-transform: translate3d(-30%, 0, 0);
+    -ms-transform: translate3d(-30%, 0, 0);
+    transform: translate3d(-30%, 0, 0);
+  }
+}
+
+@keyframes endAnimation {
+  0% {
+    -webkit-transform: translate3d(0%, 0, 0);
+    -moz-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(100%, 0, 0);
+    -moz-transform: translate3d(100%, 0, 0);
+    -ms-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes endOldAnimation {
+  0% {
+    -webkit-transform: translate3d(-30%, 0, 0);
+    -moz-transform: translate3d(-30%, 0, 0);
+    -ms-transform: translate3d(-30%, 0, 0);
+    transform: translate3d(-30%, 0, 0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0%, 0, 0);
+    -moz-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+/**  */
+@keyframes nextAnimation {
+  100% {
+    -webkit-transform: translate3d(0%, 0, 0);
+    -moz-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+@keyframes nextOldAnimation {
+  100% {
+    -webkit-transform: translate3d(-30%, 0, 0);
+    -moz-transform: translate3d(-30%, 0, 0);
+    -ms-transform: translate3d(-30%, 0, 0);
+    transform: translate3d(-30%, 0, 0);
+  }
+}
+
+@keyframes backAnimation {
+  100% {
+    -webkit-transform: translate3d(100%, 0, 0);
+    -moz-transform: translate3d(100%, 0, 0);
+    -ms-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes backOldAnimation {
+  100% {
+    -webkit-transform: translate3d(0%, 0, 0);
+    -moz-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+  }
+}
