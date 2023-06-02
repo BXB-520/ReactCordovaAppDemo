@@ -194,8 +194,29 @@ const cordovaGetPosition = (): Promise<PositionType> => {
   });
 };
 
-/** 在浏览器打开链接 */
+/** 在内部浏览器打开链接 */
 const cordovaOpenInAppBrowser = (url: string) => {
+  if (!isCordova()) return;
+  // cordova.InAppBrowser.open(
+  //   url,
+  //   '_blank',
+  //   'location=no',
+  //   'clearcache:false',
+  //   'clearsessioncache:false',
+  // );
+  webview.Show(
+    url,
+    (success: any) => {
+      console.log('success', success);
+    },
+    (error: any) => {
+      console.log('error', error);
+    },
+  );
+};
+
+/** 在浏览器打开链接 */
+const cordovaOpenOutAppBrowser = (url: string) => {
   if (!isCordova()) return;
   cordova.InAppBrowser.open(url, '_system');
 };
@@ -364,7 +385,8 @@ export {
   cordovaGetPicture, //拍照返回base64数据
   cordovaBarcodeScan, //扫描二维码
   cordovaGetPosition, //获取定位
-  cordovaOpenInAppBrowser, //在浏览器打开链接
+  cordovaOpenInAppBrowser, //在内部浏览器打开链接
+  cordovaOpenOutAppBrowser, //在浏览器打开链接
   cordovaHideSplashscreen, //隐藏屏闪
   cordovaGetCaptureAudio, //录音
   cordovaFileUpload, //文件上传

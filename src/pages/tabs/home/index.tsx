@@ -11,18 +11,24 @@ import {
   VideoOutline,
 } from 'antd-mobile-icons';
 import { Button, Card, Input } from 'antd-mobile';
-import { useEffect, useState } from 'react';
-import { cordovaCheckPermission } from '@/utils/cordova';
-
+import React, { useEffect, useState } from 'react';
+import {
+  cordovaCheckPermission,
+  cordovaOpenInAppBrowser,
+} from '@/utils/cordova';
+import {
+  getLocalStorage,
+  getSessionStorage,
+  setLocalStorage,
+  setSessionStorage,
+} from '@/utils/common';
 
 declare const Wechat: any;
 
 const Home = () => {
   const [value, setValue] = useState<string>('');
 
-  useEffect(() => {
-
-  }, []);
+  useEffect(() => {}, []);
 
   const list = [
     {
@@ -35,19 +41,56 @@ const Home = () => {
     <>
       <AppHeader
         canBack={false}
-        leftContent={
-          <div style={{ fontSize: '18px', fontWeight: '600' }}></div>
-        }
-        children="首页"
-      />
+        leftContent={<div style={{ fontSize: '18px', fontWeight: '600' }} />}
+      >
+        首页
+      </AppHeader>
 
       <AppContent>
         <div className={styles.bg}>
           <div className={styles.content}>
             <div className={styles.serach}>
               <div className={styles.title}>TitleBX</div>
-              
             </div>
+            <Button
+              onClick={() => {
+                cordovaOpenInAppBrowser('http://114.132.187.155:8082');
+              }}
+            >
+              open
+            </Button>
+
+            <Button
+              onClick={() => {
+                setSessionStorage('bx', '1');
+              }}
+            >
+              sets
+            </Button>
+
+            <Button
+              onClick={() => {
+                console.log(getSessionStorage('bx'));
+              }}
+            >
+              gets
+            </Button>
+
+            <Button
+              onClick={() => {
+                setLocalStorage('xb', '1');
+              }}
+            >
+              setl
+            </Button>
+
+            <Button
+              onClick={() => {
+                console.log(getLocalStorage('xb'));
+              }}
+            >
+              getl
+            </Button>
             <div className={styles.content}>
               {list.map((items: any, index: number) => {
                 return (
