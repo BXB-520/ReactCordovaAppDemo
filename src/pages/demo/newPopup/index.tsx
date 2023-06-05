@@ -78,7 +78,7 @@ const NewPopup = (props: any) => {
 
         <CcsPopup
           visable={visable1}
-          onMaskClick={() => setVisable1(!visable1)}
+          onMaskClick={() => setVisable1(false)}
           contentWidth="60vw"
           position="right"
         >
@@ -86,7 +86,7 @@ const NewPopup = (props: any) => {
         </CcsPopup>
         <CcsPopup
           visable={visable2}
-          onMaskClick={() => setVisable2(!visable2)}
+          onMaskClick={() => setVisable2(false)}
           contentWidth="60vw"
           position="left"
         >
@@ -94,7 +94,7 @@ const NewPopup = (props: any) => {
         </CcsPopup>
         <CcsPopup
           visable={visable3}
-          onMaskClick={() => setVisable3(!visable3)}
+          onMaskClick={() => setVisable3(false)}
           contentWidth="30vh"
           position="top"
         >
@@ -102,7 +102,7 @@ const NewPopup = (props: any) => {
         </CcsPopup>
         <CcsPopup
           visable={visable4}
-          onMaskClick={() => setVisable4(!visable4)}
+          onMaskClick={() => setVisable4(false)}
           contentWidth="30vh"
           position="bottom"
         >
