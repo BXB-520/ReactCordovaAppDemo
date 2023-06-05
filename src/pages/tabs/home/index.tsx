@@ -91,6 +91,13 @@ const Home = () => {
             >
               getl
             </Button>
+            <Button
+              onClick={() => {
+                webview.Close();
+              }}
+            >
+              webview返回
+            </Button>
             <div className={styles.content}>
               {list.map((items: any, index: number) => {
                 return (

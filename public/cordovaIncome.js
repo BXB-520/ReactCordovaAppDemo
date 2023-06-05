@@ -21,13 +21,12 @@ let scriptNode = document.createElement('script');
 scriptNode.setAttribute('type', 'text/javascript');
 let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; // android终端
 let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-if (isIOS && ssoToken) {
-  //不考虑ios
-  // scriptNode.setAttribute(
-  //   'src',
-  //   'https://cdt.cq.189.cn/iworkapi/11797607/iworkapi/vpn/cordovajs/IOS/cordova.js',
-  // );
-} else if (isAndroid && ssoToken) {
+if (isIOS) {
+  scriptNode.setAttribute(
+    'src',
+    'https://cdt.cq.189.cn/iworkapi/11797607/iworkapi/vpn/cordovajs/IOS/cordova.js',
+  );
+} else if (isAndroid) {
   scriptNode.setAttribute(
     'src',
     'https://cdt.cq.189.cn/iworkapi/11797607/iworkapi/vpn/cordovajs/Android/cordova.js',
