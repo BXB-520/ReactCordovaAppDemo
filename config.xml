@@ -23,6 +23,7 @@
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarStyle" value="lightContent" />
     <preference name="Fullscreen" value="false" />
+    <preference name="language" value="zh-Hans" />
 
     <platform name="android">
         <allow-intent href="market:*" />
@@ -49,6 +50,10 @@
         <edit-config file="*-Info.plist" mode="merge"
             target="UIViewControllerBasedStatusBarAppearance">
             <true />
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge"
+            target="CFBundleDevelopmentRegion">
+            <zh-Hans />
         </edit-config>
 
         <icon height="60" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="60" />

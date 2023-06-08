@@ -26,7 +26,10 @@ const cordovaCloseApp = () => {
  * */
 
 /** 拍照返回base64数据 */
-const cordovaGetPicture = (type: 'CAMERA' | 'PHOTO'): Promise<string> => {
+const cordovaGetPicture = (
+  type: 'CAMERA' | 'PHOTO',
+  direction: 'FRONT' | 'BACK',
+): Promise<string> => {
   const options = {
     quality: 100,
     destinationType: Camera.DestinationType.DATA_URL,
@@ -38,7 +41,8 @@ const cordovaGetPicture = (type: 'CAMERA' | 'PHOTO'): Promise<string> => {
         : Camera.PictureSourceType.PHOTOLIBRARY,
     saveToPhotoAlbum: false,
     correctOrientation: true,
-    cameraDirection: Camera.Direction.FRONT,
+    cameraDirection:
+      direction == 'FRONT' ? Camera.Direction.FRONT : Camera.Direction.BACK,
   };
   return new Promise((resolve) => {
     if (!isCordova()) resolve('');

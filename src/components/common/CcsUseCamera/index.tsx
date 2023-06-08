@@ -7,12 +7,19 @@ interface CcsUseCameraType {
   backBase64: (Base64: string) => void;
   /** 类型 */
   type: 'CAMERA' | 'PHOTO';
+  /** 使用的摄像头 */
+  direction?: 'FRONT' | 'BACK';
   /** 内容 */
   children: React.ReactNode;
 }
 
 /** 使用app相机 */
-const CcsUseCamera: FC<CcsUseCameraType> = ({ backBase64, type, children }) => {
+const CcsUseCamera: FC<CcsUseCameraType> = ({
+  backBase64,
+  type,
+  children,
+  direction = 'BACK',
+}) => {
   const handlerUploadImg = (e: any) => {
     const { files } = e.target;
     const file = files[0];
@@ -34,7 +41,7 @@ const CcsUseCamera: FC<CcsUseCameraType> = ({ backBase64, type, children }) => {
           <label>
             <div
               onClick={() => {
-                cordovaGetPicture(type).then((e: string) => {
+                cordovaGetPicture(type, direction).then((e: string) => {
                   backBase64(e);
                 });
               }}

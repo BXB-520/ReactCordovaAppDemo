@@ -13,6 +13,7 @@ import {
 import { Button, Card, Input } from 'antd-mobile';
 import React, { useEffect, useState } from 'react';
 import {
+  cordovaBarcodeScan,
   cordovaCheckPermission,
   cordovaOpenInAppBrowser,
 } from '@/utils/cordova';
@@ -54,7 +55,9 @@ const Home = () => {
             </div>
             <Button
               onClick={() => {
-                cordovaOpenInAppBrowser('http://114.132.187.155:8082');
+                cordovaOpenInAppBrowser(
+                  'http://114.132.187.155:8082?ssoToken=123',
+                );
               }}
             >
               open
@@ -98,6 +101,30 @@ const Home = () => {
             >
               webview返回
             </Button>
+            <Button
+              onClick={() => {
+                UserAgent.set('12345');
+              }}
+            >
+              UserAgent.set(useragent)
+            </Button>
+            <Button
+              onClick={() => {
+                UserAgent.get(function (ua) {
+                  console.log(ua);
+                });
+              }}
+            >
+              UserAgent.set(useragent)
+            </Button>
+            <Button
+              onClick={() => {
+                UserAgent.reset();
+              }}
+            >
+              UserAgent.reset()
+            </Button>
+
             <div className={styles.content}>
               {list.map((items: any, index: number) => {
                 return (

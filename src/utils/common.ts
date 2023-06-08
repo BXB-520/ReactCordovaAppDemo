@@ -89,6 +89,22 @@ export const requestMobileContext = () => {
   return 'pc';
 };
 
+/**
+ * file类型转base地址
+ * @param file
+ * @returns
+ */
+export const getBase64Url = (file: File) => {
+  return new Promise((resolve) => {
+    const fr = new FileReader();
+    fr.readAsDataURL(file);
+    fr.onload = async (e) => {
+      const base64 = e?.target?.result;
+      resolve(base64);
+    };
+  });
+};
+
 export default class Tips {
   static isLoading = false;
 
