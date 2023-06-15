@@ -2,6 +2,7 @@ import { NavBar, NavBarProps } from 'antd-mobile';
 import React, { FC, ReactChild } from 'react';
 import { history } from 'umi';
 import styles from './index.less';
+import { isCordova, requestMobileContext } from '@/utils/common';
 
 interface AppHeaderPropsType extends NavBarProps {
   canBack?: boolean; // 返回按钮，默认true
@@ -33,7 +34,14 @@ const AppHeader: FC<AppHeaderPropsType> = ({
   };
 
   return (
-    <div className={styles.topsafearea} style={NavBarClass}>
+    <div
+      className={
+        requestMobileContext() == 'ios'
+          ? styles.topsafeareaforios
+          : styles.topsafeareaforandroid
+      }
+      style={NavBarClass}
+    >
       <NavBar
         left={leftContent}
         right={rightContent}

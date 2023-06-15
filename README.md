@@ -28,7 +28,22 @@ cordova run android / ios (手机在线调试)
 
 ### 常见问题和配置需求
 
-1.允许 Http 网络请求 在 AndroidManifest.xml 文件的 application 中配置 android:usesCleartextTraffic="true"
+1.允许 Http 网络请求 在 AndroidManifest.xml 文件的 application 中配置 android:usesCleartextTraffic="true"（xml 配置自带） 2.安卓沉浸式状态栏 路径 ReactCordovaAppDemo\platforms\android\app\src\main\java\org\apache\cordova\statusbar.java
+代码替换如下
+this.cordova.getActivity().runOnUiThread(new Runnable() {
+@Override
+public void run() {
+// Clear flag FLAG_FORCE_NOT_FULLSCREEN which is set initially
+// by the Cordova.
+Window window = cordova.getActivity().getWindow();
+window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+// window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+window.setStatusBarColor(Color.TRANSPARENT);
+//window.setNavigationBarColor(Color.TRANSPARENT);
+window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+}
+});
 
 ### 嵌入式第三方插件提供方法
 

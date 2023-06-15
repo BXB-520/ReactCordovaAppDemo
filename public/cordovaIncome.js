@@ -1,12 +1,12 @@
 //根据android和ios环境引入不同的js
-let ssoToken = '';
-const name = 'ssoToken';
+let isOutSide = '';
+const name = 'isOutSide';
 const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)'); //构造一个含有目标参数的正则表达式对象
 const r = window.location.search.substr(1).match(reg); //匹配目标参数
 if (r != null) {
-  ssoToken = unescape(r[2]);
+  isOutSide = unescape(r[2]);
 } else {
-  ssoToken = null;
+  isOutSide = null;
 }
 /** 动态引入cordova包 */
 let u = navigator.userAgent;
@@ -14,12 +14,12 @@ let scriptNode = document.createElement('script');
 scriptNode.setAttribute('type', 'text/javascript');
 let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; // android终端
 let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-if (isIOS && ssoToken) {
+if (isIOS && isOutSide) {
   scriptNode.setAttribute(
     'src',
-    'https://cdt.cq.189.cn/iworkapi/11797607/iworkapi/vpn/cordovajs/IOS/cordova.js',
+    '暂不提供',
   );
-} else if (isAndroid && ssoToken) {
+} else if (isAndroid && isOutSide) {
   scriptNode.setAttribute(
     'src',
     'http://114.132.187.155:8082/webview/android/cordova.js',

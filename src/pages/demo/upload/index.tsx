@@ -5,7 +5,7 @@ import { Card, Button, Toast } from 'antd-mobile';
 import { DelayUseEffect } from '@/hooks';
 import styles from './index.less';
 import CcsUseCamera from '@/components/common/CcsUseCamera';
-import { cordovaBarcodeScan } from '@/utils/cordova';
+import { cordovaEasyqrcode } from '@/utils/cordova';
 
 import { getBase64Url } from '@/utils/common';
 import CcsCarmaUpload from '@/components/common/CcsCarmaUpload';
@@ -99,7 +99,7 @@ const request = () => {
               <div>
                 <Button
                   onClick={() => {
-                    cordovaBarcodeScan().then((e) => {
+                    cordovaEasyqrcode().then((e) => {
                       console.log(e);
                     });
                   }}

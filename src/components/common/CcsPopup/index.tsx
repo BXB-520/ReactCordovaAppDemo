@@ -1,5 +1,6 @@
 import React, { useEffect, useState, FC } from 'react';
 import publicStyle from './index.less';
+import { requestMobileContext } from '@/utils/common';
 
 interface CcsPopupType {
   /** 开关状态控制 */
@@ -87,7 +88,14 @@ const CcsPopup: FC<CcsPopupType> = ({
             }}
           />
 
-          <div className={publicStyle.content} style={{ width: contentWidth }}>
+          <div
+            className={
+              requestMobileContext() == 'ios'
+                ? publicStyle.contentios
+                : publicStyle.contentandroid
+            }
+            style={{ width: contentWidth }}
+          >
             {children}
           </div>
         </div>
@@ -111,7 +119,9 @@ const CcsPopup: FC<CcsPopupType> = ({
           <div
             className={
               position == 'top'
-                ? publicStyle.content
+                ? requestMobileContext() == 'ios'
+                  ? publicStyle.contentios
+                  : publicStyle.contentandroid
                 : publicStyle.contentbottom
             }
             style={{ height: contentWidth }}

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppContent, AppPage } from '@/components/system/AppPages';
 import AppHeader from '@/components/system/AppHeader';
 import styles from './index.less';
@@ -11,7 +11,14 @@ import {
 const PlayVideo = (props: any) => {
   const context: RouteInfoContextType = useContext(RouteInfoContext);
 
-  useEffect(() => {}, []);
+  const [a, seta] = useState('');
+  console.log(a);
+
+  useEffect(() => {
+    return () => {
+      console.log(a);
+    };
+  }, []);
 
   return (
     <AppPage>
@@ -27,6 +34,13 @@ const PlayVideo = (props: any) => {
                 }}
               >
                 携带参数返回
+              </Button>
+              <Button
+                onClick={() => {
+                  seta('564556456');
+                }}
+              >
+                1
               </Button>
             </Card>
           </div>

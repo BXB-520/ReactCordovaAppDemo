@@ -3,7 +3,7 @@
 @import '../../../common.less';
 
 /** ios顶部底部偏移量 自动适配 */
-.topsafearea {
+.topsafeareaforios {
   color: #fff;
   background: @theme-color;
   padding-top: constant(safe-area-inset-top);
@@ -14,12 +14,34 @@
     .adm-nav-bar {
       height: 42px;
     }
-    
-    .adm-nav-bar-right{
+
+    .adm-nav-bar-right {
       text-align: -webkit-right;
     }
 
-    .adm-nav-bar-back{
+    .adm-nav-bar-back {
+      padding: 0;
+    }
+  }
+}
+
+/** ios顶部底部偏移量 自动适配 */
+.topsafeareaforandroid {
+  color: #fff;
+  background: @theme-color;
+  padding-top: var(--adm-safe-top);
+  z-index: 1000;
+
+  :global {
+    .adm-nav-bar {
+      height: 42px;
+    }
+
+    .adm-nav-bar-right {
+      text-align: -webkit-right;
+    }
+
+    .adm-nav-bar-back {
       padding: 0;
     }
   }

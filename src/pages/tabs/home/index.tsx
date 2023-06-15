@@ -62,6 +62,20 @@ const Home = () => {
             >
               open
             </Button>
+            <Button
+              onClick={() => {
+                cordovaOpenInAppBrowser('https://m.bilibili.com/');
+              }}
+            >
+              open1
+            </Button>
+            <Button
+              onClick={() => {
+                cordovaOpenInAppBrowser('http://114.132.187.155:8081/');
+              }}
+            >
+              open2
+            </Button>
 
             <Button
               onClick={() => {
@@ -96,7 +110,7 @@ const Home = () => {
             </Button>
             <Button
               onClick={() => {
-                webview.Close();
+                webview.ExitApp();
               }}
             >
               webview返回

@@ -63,8 +63,8 @@ const AppTabs: React.FC<{ tabs: TabsDataType[] }> = ({ tabs }) => {
       <div className={styles.tabsinner}>
         {currentTabs.map((tab) => renderTab(tab))}
       </div>
-      <div className={stylesList[1]}>
-        <div className={styles.tabscontent} style={{ height: '60px' }}>
+      <div className={stylesList[0]}>
+        <div className={styles.tabscontent} style={{ height: '56px' }}>
           {tabs.map((tab) => {
             return (
               <div

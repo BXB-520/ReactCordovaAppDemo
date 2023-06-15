@@ -23,8 +23,9 @@ const AppGesture = ({ gestureprops }: any) => {
     // 初始化APP，修改状态栏颜色
 
     const onDeviceReady = () => {
-      StatusBar.backgroundColorByHexString(THEMECOLOR);
-      StatusBar.styleLightContent();
+      // 沉浸式状态栏不需要这个
+      // StatusBar.backgroundColorByHexString(THEMECOLOR);
+      // StatusBar.styleLightContent();
 
       /** 返回按钮绑定 */
       document.addEventListener('backbutton', eventBackButton);

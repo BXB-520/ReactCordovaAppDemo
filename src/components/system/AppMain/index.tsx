@@ -334,7 +334,7 @@ const AppMain = ({ mainprops }: any) => {
   return (
     <>
       {historyList.map((item: any, index: number) => {
-        return requestMobileContext() == 'ios' ? (
+        return (
           <Gesture
             key={item.id}
             onPanEnd={(e: any) => {
@@ -420,56 +420,6 @@ const AppMain = ({ mainprops }: any) => {
               </div>
             </div>
           </Gesture>
-        ) : (
-          <div
-            key={item.id}
-            style={{
-              position: 'absolute',
-              inset: '0px',
-              top: '0px',
-              right: '0px',
-              left: '0px',
-              bottom: '0px',
-              overflow: 'hidden',
-              zIndex: item.id,
-            }}
-            className={transformType()}
-          >
-            <div
-              style={{
-                position: 'absolute',
-                inset: '0px',
-                top: '0px',
-                right: '0px',
-                left: '0px',
-                bottom: '0px',
-                overflow: 'hidden',
-                transform:
-                  item.id == historyList[historyList.length - 1].id
-                    ? `translate3d(${movex},0px,0px)`
-                    : item.id == historyList[historyList.length - 2].id
-                    ? `translate3d(calc(-30% + ( 30% / ( ${
-                        window.innerWidth
-                      } / ${parseInt(movex, 10)} ))),0px,0px)`
-                    : `translate3d(0px,0px,0px)`,
-              }}
-              className={`${childtransform(item.id)} ${styles.borderleft}`}
-            >
-              <RouteInfoContext.Provider
-                key={item.id}
-                value={{
-                  routeInfo: { ...item },
-                  onHistoryBack,
-                  onHandleCallBack,
-                  pageCallBackRef,
-                  dispatch,
-                  handelDelHistory,
-                }}
-              >
-                <Switch location={item.location}>{item.children}</Switch>
-              </RouteInfoContext.Provider>
-            </div>
-          </div>
         );
       })}
     </>

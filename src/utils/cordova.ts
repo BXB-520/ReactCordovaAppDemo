@@ -8,6 +8,7 @@ declare const webview: any;
 declare const window: any;
 declare const FileUploadOptions: any;
 declare const FileTransfer: any;
+declare const cloudSky: any;
 
 /** 关闭App */
 const cordovaCloseApp = () => {
@@ -66,29 +67,25 @@ export interface BarcodeScanData {
 }
 
 /** 扫描二维码 */
-const cordovaBarcodeScan = (): Promise<string> => {
+const cordovaEasyqrcode = (): Promise<string> => {
   return new Promise((resolve) => {
     if (!isCordova()) resolve('');
-    cordova.plugins.barcodeScanner.scan(
-      (result: BarcodeScanData) => {
-        resolve(result.text);
+    cloudSky.zBar.scan(
+      {
+        text_title: '扫一扫', // Android only
+        text_content: '请对准需要扫描的二维码',
+        text_instructions: '扫一扫', // Android only
+        camera: 'back', // defaults to "back"
+        flash: 'off', // defaults to "auto". See Quirks
+        drawSight: true, //defaults to true, create a red sight/line in the center of the scanner view.
+      },
+      (success: string) => {
+        console.log(success);
+        resolve(success);
       },
       (error: string) => {
-        console.log(`Scanning failed: ${error}`);
+        console.log('error', error);
         resolve('');
-      },
-      {
-        preferFrontCamera: false, // 是否默认使用前置摄像头（同时支持 iOS 和 Android）
-        showFlipCameraButton: false, // 是否显示前后摄像头切换按钮（同时支持 iOS 和 Android）
-        showTorchButton: false, // 是否显示打开关闭闪光灯按钮（同时支持 iOS 和 Android）
-        torchOn: false, // 是否默认打开闪关灯（仅支持 Android）
-        saveHistory: false, // 是否记录扫码历史（仅支持 Android）
-        prompt: '请扫描二维码', // 扫码界面下方提示语（仅支持 Android）
-        // resultDisplayDuration: 500, // 扫码文本在扫码界面上显示多少毫秒。0完全禁用。默认1500（仅Android）
-        // formats : "QR_CODE,PDF_417", // 支持的格式,默认为除PDF_417和RSS_EXPANDED之外的所有格式
-        orientation: 'portrait', // 设置为横向或纵向(portrait|landscape),默认跟随手机旋转（仅Android）
-        // disableAnimations : true, // 禁用动画（仅支持 iOS）
-        // disableSuccessBeep: false // 禁用成功蜂鸣声（同时支持 iOS 和 Android）
       },
     );
   });
@@ -211,11 +208,18 @@ const cordovaOpenInAppBrowser = (url: string) => {
   webview.Show(
     url,
     (success: any) => {
-      console.log('success', success);
+      setTimeout(() => {
+        webview.HideLoading();
+      }, 2000);
+      console.log('success', new Date().getMinutes());
     },
     (error: any) => {
+      setTimeout(() => {
+        webview.HideLoading();
+      }, 2000);
       console.log('error', error);
     },
+    true,
   );
 };
 
@@ -251,6 +255,26 @@ const cordovaGetCaptureAudio = (
         resolve([]);
       },
       { limit, duration },
+    );
+  });
+};
+
+/** app录像插件
+ * limit：最大录制数量
+ */
+const cordovaGetCaptureVideo = (limit: number): Promise<{}[]> => {
+  return new Promise((resolve: Function) => {
+    if (!isCordova()) resolve('');
+    navigator.device.capture.captureVideo(
+      (result: {}[]) => {
+        console.log('result', result);
+        resolve(result);
+      },
+      (error: string) => {
+        console.log('err', error);
+        resolve([]);
+      },
+      { limit },
     );
   });
 };
@@ -387,12 +411,13 @@ const timeOut = (delay = 1000) => {
 export {
   cordovaCloseApp, //关闭App
   cordovaGetPicture, //拍照返回base64数据
-  cordovaBarcodeScan, //扫描二维码
+  cordovaEasyqrcode, //扫描二维码
   cordovaGetPosition, //获取定位
   cordovaOpenInAppBrowser, //在内部浏览器打开链接
   cordovaOpenOutAppBrowser, //在浏览器打开链接
   cordovaHideSplashscreen, //隐藏屏闪
   cordovaGetCaptureAudio, //录音
+  cordovaGetCaptureVideo, //录像
   cordovaFileUpload, //文件上传
   cordovaCallVolte, //拨打高清视频通话
   cordovaCheckPermission, //权限申请

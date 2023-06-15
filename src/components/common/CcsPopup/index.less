@@ -8,9 +8,17 @@
   transition: left 300ms;
   transition-timing-function: easy;
 
-  .content {
+  .contentios {
     padding-top: constant(safe-area-inset-top);
     padding-top: env(safe-area-inset-top);
+    position: absolute;
+    background-color: #fff;
+    height: calc(100vh - 42px);
+    z-index: 999;
+  }
+
+  .contentandroid {
+    padding-top: var(--adm-safe-top);
     position: absolute;
     background-color: #fff;
     height: calc(100vh - 42px);
@@ -37,9 +45,17 @@
   transition: top 300ms;
   transition-timing-function: easy;
 
-  .content {
+  .contentios {
     padding-top: constant(safe-area-inset-top);
     padding-top: env(safe-area-inset-top);
+    position: absolute;
+    background-color: #fff;
+    width: 100vw;
+    z-index: 999;
+  }
+
+  .contentandroid {
+    padding-top: var(--adm-safe-top);
     position: absolute;
     background-color: #fff;
     width: 100vw;

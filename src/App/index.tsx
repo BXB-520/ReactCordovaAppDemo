@@ -5,7 +5,12 @@ import VConsole from 'vconsole';
 import { FloatingBubble } from 'antd-mobile';
 import { LeftOutline } from 'antd-mobile-icons';
 import StartPage from '@/assets/imgs/login/start.png';
-import { getLocalStorage, isCordova, setSessionStorage } from '@/utils/common';
+import {
+  getLocalStorage,
+  isCordova,
+  requestMobileContext,
+  setSessionStorage,
+} from '@/utils/common';
 import { cordovaCheckPermission } from '@/utils/cordova';
 
 const App = (props: any) => {
@@ -36,6 +41,10 @@ const App = (props: any) => {
   const handelAppLoad = async () => {
     /** 设置系统默认值 0开发 1调试 */
     setSessionStorage('sysMode', '0');
+    /** 安卓定义突出的状态栏安全区域 */
+    if (requestMobileContext() == 'android') {
+      document.documentElement.style.setProperty('--adm-safe-top', '30px');
+    }
 
     if (TICKET) {
       setRefresh(false);
