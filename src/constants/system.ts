@@ -28,3 +28,6 @@ export const NEWWORK_CODE_MESSAGE: { [key: number]: string } = {
   503: '服务不可用，服务器暂时过载或维护。',
   504: '网关超时。',
 };
+
+/** 安卓图片保存目录 */
+export const ANDROID_FILEURL = 'file:///storage/emulated/0/DCIM/qccq/';

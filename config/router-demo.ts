@@ -48,4 +48,9 @@ export default [
     path: '/demo/upload',
     component: '@/pages/demo/upload',
   },
+  {
+    name: 'demo-file',
+    path: '/demo/file',
+    component: '@/pages/demo/file',
+  },
 ];

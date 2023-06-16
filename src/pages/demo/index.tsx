@@ -46,6 +46,10 @@ const WebView = (props: any) => {
       url: '/demo/request',
       title: '接口使用',
     },
+    {
+      url: '/demo/file',
+      title: '文件处理',
+    },
   ];
   return (
     <AppPage>

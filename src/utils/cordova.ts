@@ -1,5 +1,6 @@
 import { Toast } from 'antd-mobile';
-import { isCordova } from './common';
+import { isCordova, requestMobileContext } from './common';
+import { ANDROID_FILEURL } from '@/constants/system';
 
 declare const navigator: any;
 declare const Camera: any;
@@ -198,20 +199,13 @@ const cordovaGetPosition = (): Promise<PositionType> => {
 /** 在内部浏览器打开链接 */
 const cordovaOpenInAppBrowser = (url: string) => {
   if (!isCordova()) return;
-  // cordova.InAppBrowser.open(
-  //   url,
-  //   '_blank',
-  //   'location=no',
-  //   'clearcache:false',
-  //   'clearsessioncache:false',
-  // );
   webview.Show(
     url,
     (success: any) => {
       setTimeout(() => {
         webview.HideLoading();
       }, 2000);
-      console.log('success', new Date().getMinutes());
+      console.log('success', success);
     },
     (error: any) => {
       setTimeout(() => {
@@ -290,6 +284,8 @@ const cordovaFileUpload = (
   uploadParams: {},
 ): Promise<boolean> => {
   return new Promise((resolve: Function) => {
+    if (!isCordova()) resolve('');
+
     const options = new FileUploadOptions();
 
     options.fileKey = 'file';
@@ -299,7 +295,7 @@ const cordovaFileUpload = (
     options.headers = null;
     options.params = { ...uploadParams };
 
-    const FT = new FileTransfer();
+    const File = new FileTransfer();
 
     // 上传成功
     const success = (r: { responseCode: string }) => {
@@ -312,7 +308,124 @@ const cordovaFileUpload = (
       console.log(`上传失败! Code = ${error.code}`);
       resolve(false);
     };
-    FT.upload(fileURL, encodeURI(uploadUrl), success, fail, options);
+    File.upload(fileURL, encodeURI(uploadUrl), success, fail, options);
+  });
+};
+
+/** 获取当前时间 */
+const handelGetCurrentTime = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const day = now.getDate();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  const second = now.getSeconds();
+  return (
+    year +
+    (month < 10 ? '0' : '') +
+    month +
+    (day < 10 ? '0' : '') +
+    day +
+    (hour < 10 ? '0' : '') +
+    hour +
+    (minute < 10 ? '0' : '') +
+    minute +
+    (second < 10 ? '0' : '') +
+    second
+  );
+};
+
+/** 文件下载
+ * downloadUrl：下载图片url多张
+ * fileType：文件类型，更具需要修改代码
+ * needProgress：是否需要监听进度
+ * http://114.132.187.155:8082/webview/android/12.jpg
+ */
+const cordovaFileDownloadToJPG = (
+  downloadUrl: string[],
+  fileType: '.jpg',
+  needProgress?: boolean,
+): Promise<boolean> => {
+  return new Promise((resolve: Function) => {
+    if (!isCordova()) resolve('');
+
+    const File = new FileTransfer();
+    Toast.show({
+      icon: 'loading',
+      content: '正在下载',
+      maskClickable: false,
+      duration: 0,
+    });
+
+    // 文件下载进度回调函数
+    if (needProgress) {
+      File.onprogress = (progressEvent: {
+        lengthComputable: boolean;
+        loaded: number;
+        total: number;
+      }) => {
+        if (progressEvent.lengthComputable) {
+          // 计算下载进度
+          const percent = Math.round(
+            (progressEvent.loaded / progressEvent.total) * 100,
+          );
+          console.log('下载中 ' + percent + '%');
+        } else {
+          console.log('正在下载...');
+        }
+      };
+    }
+
+    const errorNum: any = []; //统计失败次数
+
+    downloadUrl.map((singelUrl: string, index: number) => {
+      const fileUrl = encodeURI(singelUrl);
+      const success = (result: any) => {
+        // 下载完成后手动触发媒体库更新-安卓唯一
+        if (requestMobileContext() == 'android') {
+          cordova.plugins.MediaScannerPlugin.scanFile(
+            result.toURL(),
+            (msg: string) => {
+              console.log('媒体库更新成功');
+            },
+            (err: string) => {
+              console.log('媒体库更新失败: ' + err);
+            },
+          );
+        }
+        /** 最后一张图片处理后 */
+        if (downloadUrl.length == index + 1 && errorNum.length == 0) {
+          console.log(`保存成功 ${result}`);
+          Toast.show({
+            icon: 'success',
+            content: '保存成功',
+            duration: 2000,
+          });
+          resolve(true);
+        } else if (downloadUrl.length == index + 1 && errorNum.length > 0) {
+          console.log(`部分保存失败 ${errorNum.toString()}`);
+          Toast.show({
+            icon: 'fail',
+            content: `第${errorNum.toString()}张图片保存失败，请重试`,
+            duration: 2000,
+          });
+          resolve(true);
+        }
+      };
+      // 下载失败
+      const fail = (error: any) => {
+        errorNum.push(index + 1);
+      };
+
+      File.download(
+        fileUrl,
+        ANDROID_FILEURL + `Qccq_${handelGetCurrentTime()}_${index}${fileType}`,
+        success,
+        fail,
+      );
+      return null;
+    });
   });
 };
 
@@ -419,6 +532,7 @@ export {
   cordovaGetCaptureAudio, //录音
   cordovaGetCaptureVideo, //录像
   cordovaFileUpload, //文件上传
+  cordovaFileDownloadToJPG, //图片下载
   cordovaCallVolte, //拨打高清视频通话
   cordovaCheckPermission, //权限申请
 };

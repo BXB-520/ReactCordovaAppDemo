@@ -15,6 +15,8 @@ import React, { useEffect, useState } from 'react';
 import {
   cordovaBarcodeScan,
   cordovaCheckPermission,
+  cordovaFileDownload,
+  cordovaFileDownloadToJPG,
   cordovaOpenInAppBrowser,
 } from '@/utils/cordova';
 import {
@@ -56,7 +58,8 @@ const Home = () => {
             <Button
               onClick={() => {
                 cordovaOpenInAppBrowser(
-                  'http://114.132.187.155:8082?ssoToken=123',
+                  'http://xmtzx.cqyouths.com/match/',
+                  // 'http://114.132.187.155:8082?ssoToken=123',
                 );
               }}
             >
@@ -137,6 +140,46 @@ const Home = () => {
               }}
             >
               UserAgent.reset()
+            </Button>
+            <Button
+              onClick={() => {
+                cordovaFileDownloadToJPG(
+                  ['http://114.132.187.155:8082/webview/android/12.jpg'],
+                  '.jpg',
+                );
+              }}
+            >
+              下载1张
+            </Button>
+            <Button
+              onClick={() => {
+                cordovaFileDownloadToJPG(
+                  [
+                    'http://114.132.187.155:8082/webview/android/11.jpg',
+                    'http://114.132.187.155:8082/webview/android/12.jpg',
+                    'http://114.132.187.155:8082/webview/android/13.jpg',
+                    'http://114.132.187.155:8082/webview/android/14.jpg',
+                  ],
+                  '.jpg',
+                );
+              }}
+            >
+              下载4张
+            </Button>
+            <Button
+              onClick={() => {
+                cordovaFileDownloadToJPG(
+                  [
+                    'http://114.132.187.155:8082/webview/android/11.jpg',
+                    'http://114.132.187.155:8082/webview/android/12.jpg',
+                    'http://114.132.187.155:8082/webview/android/19.jpg',
+                    'http://114.132.187.155:8082/webview/android/14.jpg',
+                  ],
+                  '.jpg',
+                );
+              }}
+            >
+              下载4张 1张有问题
             </Button>
 
             <div className={styles.content}>

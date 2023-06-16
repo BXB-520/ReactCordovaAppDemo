@@ -105,4 +105,6 @@
     <plugin name="cordova-plugin-carrying-plugins-webview" spec="^1.0.8" />
     <plugin name="cordova-plugin-easyqrcode" spec="^1.0.8" />
     <plugin name="cordova-plugin-useragent" spec="^1.0.6" />
+    <plugin name="cordova-plugin-file" spec="^7.0.0" />
+    <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
 </widget>
