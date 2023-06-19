@@ -418,12 +418,18 @@ const cordovaFileDownloadToJPG = (
         errorNum.push(index + 1);
       };
 
-      File.download(
-        fileUrl,
-        ANDROID_FILEURL + `Qccq_${handelGetCurrentTime()}_${index}${fileType}`,
-        success,
-        fail,
-      );
+      const localFileUrl = () => {
+        if (requestMobileContext() == 'ios') {
+          return cordova.file.documentsDirectory;
+        } else {
+          return (
+            ANDROID_FILEURL +
+            `Qccq_${handelGetCurrentTime()}_${index}${fileType}`
+          );
+        }
+      };
+
+      File.download(fileUrl, localFileUrl(), success, fail);
       return null;
     });
   });

@@ -31,3 +31,6 @@ export const NEWWORK_CODE_MESSAGE: { [key: number]: string } = {
 
 /** 安卓图片保存目录 */
 export const ANDROID_FILEURL = 'file:///storage/emulated/0/DCIM/qccq/';
+
+/** ios图片保存目录 */
+export const IOS_FILEURL = 'file:///storage/emulated/0/DCIM/qccq/';

@@ -27,6 +27,8 @@ const AppGesture = ({ gestureprops }: any) => {
       // StatusBar.backgroundColorByHexString(THEMECOLOR);
       // StatusBar.styleLightContent();
 
+      StatusBar.overlaysWebView();
+
       /** 返回按钮绑定 */
       document.addEventListener('backbutton', eventBackButton);
 

@@ -30,7 +30,7 @@
     "@ant-design/pro-layout": "^6.5.0",
     "antd-mobile": "5.28.1",
     "antd-mobile-icons": "^0.3.0",
-    "cordova": "^11.0.0",
+    "cordova": "^11.1.0",
     "crypto-js": "^4.1.1",
     "eslint-plugin-jest": "^27.2.1",
     "flv.js": "^1.6.2",
@@ -113,7 +113,8 @@
       "cordova-plugin-easyqrcode": {},
       "cordova-plugin-media-capture": {},
       "cordova-plugin-useragent": {},
-      "br.com.brunogrossi.MediaScannerPlugin": {}
+      "br.com.brunogrossi.MediaScannerPlugin": {},
+      "im.ltdev.cordova.UserAgent": {}
     },
     "platforms": [
       "ios",

@@ -60,9 +60,9 @@
             <true />
         </edit-config>
         <!-- 配置ios语言默认中文 -->
-        <edit-config file="*-Info.plist" mode="merge" target="CFBundleDevelopmentRegion">
+        <!-- <edit-config file="*-Info.plist" mode="merge" target="CFBundleDevelopmentRegion">
             <zh-Hans />
-        </edit-config>
+        </edit-config> -->
         <icon height="60" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="60" />
         <icon height="120" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="120" />
         <icon height="180" platforms="ios" src="resources/icon/android/Icon-mdpi.png" width="180" />
